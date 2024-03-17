@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:local_traveler_app/screens/PopularDestinationsPage.dart';
+import 'package:local_traveler_app/screens/HiddenGemsPage.dart';
 import 'package:local_traveler_app/widgets/CustomInput.dart';
 import 'package:local_traveler_app/widgets/DiscoverItem.dart';
 
 class SearchPage extends StatelessWidget {
-  const SearchPage({super.key});
+  const SearchPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +31,26 @@ class SearchPage extends StatelessWidget {
           DiscoverItem(
             iconPath: "./assets/icons/map-travel.png",
             title: "Popüler Hedefler",
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PopularDestinationsPage(),
+                ),
+              );
+            },
           ),
           DiscoverItem(
             iconPath: "./assets/icons/binoculars.png",
             title: "Saklı Hazineler",
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HiddenGemsPage(),
+                ),
+              );
+            },
           ),
         ],
       ),
