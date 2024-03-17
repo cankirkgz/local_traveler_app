@@ -34,7 +34,13 @@ dependencies:
   #UI
   animated_custom_dropdown: ^3.0.0
   #STATE_MANAGEMENT
-  flutter_riverpod:
+  riverpod: ^2.5.1
+  flutter_riverpod: ^2.5.1
+  provider: ^6.1.2
+  #FIREBASE
+  firebase_core: ^2.27.1
+  firebase_auth: ^4.17.9
+  cloud_firestore: ^4.15.9
 
 
   # The following adds the Cupertino Icons font to your application.

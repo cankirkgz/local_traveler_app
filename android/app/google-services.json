@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "557347852821",
+    "project_id": "localtraveler-8c69d",
+    "storage_bucket": "localtraveler-8c69d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557347852821:android:43c5bee81d82769c4ab41c",
+        "android_client_info": {
+          "package_name": "com.example.local_traveler_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIhv-Bq1pighTEhBnwJ3v3ZWb7EY_nL4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
