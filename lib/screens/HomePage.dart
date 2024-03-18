@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_traveler_app/model/UserModel.dart';
 import 'package:local_traveler_app/screens/MessagesPage.dart';
 import 'package:local_traveler_app/screens/NewTripPage.dart'; // Yeni import
 import 'package:local_traveler_app/screens/PostPage.dart';
@@ -7,7 +8,8 @@ import 'package:local_traveler_app/screens/SearchPage.dart';
 import 'package:local_traveler_app/widgets/BottomNavBar.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key});
+  final UserModel? userModel;
+  const HomePage({Key? key, required this.userModel});
 
   @override
   State<HomePage> createState() => _HomePageState();

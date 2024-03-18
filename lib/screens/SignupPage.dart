@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:local_traveler_app/services/auth_service.dart';
+import 'package:local_traveler_app/viewmodel/my_user_model.dart';
 import 'package:local_traveler_app/widgets/CustomButton.dart';
 import 'package:local_traveler_app/widgets/CustomInput.dart';
 import 'package:local_traveler_app/screens/LoginPage.dart';
+import 'package:provider/provider.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -45,11 +48,12 @@ class _SignupPageState extends State<SignupPage> {
       setState(() {
         _errorMessage = null;
       });
-
-      print('Email: $email');
-      print('Password: $password');
-      print('Name: $name');
-      print('City: $_selectedCity');
+      AuthService().registerUser(
+        name: nameController.text,
+        email: emailController.text,
+        password: passwordController.text,
+        city: _selectedCity!,
+      );
     }
   }
 
@@ -61,6 +65,7 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _userModel = Provider.of<MyUserModel>(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,

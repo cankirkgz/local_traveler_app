@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:local_traveler_app/model/onboarding_content_model.dart';
 import 'package:local_traveler_app/screens/LoginPage.dart'; // LoginPage import edildi
 
-class Onbording extends StatefulWidget {
+class Onboarding extends StatefulWidget {
   @override
-  _OnbordingState createState() => _OnbordingState();
+  _OnboardingState createState() => _OnboardingState();
 }
 
-class _OnbordingState extends State<Onbording> {
+class _OnboardingState extends State<Onboarding> {
   int index = 0;
   int currentIndex = 0;
   late PageController _controller;
