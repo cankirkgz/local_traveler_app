@@ -15,8 +15,9 @@ class UserRepository implements AuthBase {
   @override
   Future<UserModel?> signInWithEmailAndPassword(
       String email, String password) async {
-    return await _firebaseAuthService.signInWithEmailAndPassword(
-        email, password);
+    UserModel? _user =
+        await _firebaseAuthService.signInWithEmailAndPassword(email, password);
+    return await _firestoreDBService.readUser(_user!.id);
   }
 
   @override
@@ -31,7 +32,7 @@ class UserRepository implements AuthBase {
         .createUserWithEmailAndPassword(email, password);
     bool _result = await _firestoreDBService.saveUser(_user!);
     if (_result) {
-      return _user;
+      return await _firestoreDBService.readUser(_user.id);
     } else {
       return null;
     }

@@ -12,7 +12,7 @@ class LandingPage extends StatelessWidget {
 
     if (_userModel.state == ViewState.Idle) {
       if (_userModel.user == null) {
-        return SignupPage();
+        return Onboarding();
       } else {
         return HomePage(userModel: _userModel.user);
       }

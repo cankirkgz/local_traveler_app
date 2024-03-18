@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:local_traveler_app/model/UserModel.dart';
+import 'package:local_traveler_app/model/trip_model.dart';
 import 'package:local_traveler_app/screens/LocalPeoplePage.dart';
+import 'package:local_traveler_app/viewmodel/my_trip_model.dart';
+import 'package:local_traveler_app/viewmodel/my_user_model.dart';
 import 'package:local_traveler_app/widgets/CustomButton.dart';
 import 'package:local_traveler_app/widgets/CustomInput.dart';
+import 'package:provider/provider.dart';
 
 class NewTripPage extends StatelessWidget {
   const NewTripPage({Key? key}) : super(key: key);
@@ -9,6 +14,39 @@ class NewTripPage extends StatelessWidget {
   static TextEditingController dateController = TextEditingController();
   static TextEditingController dayController = TextEditingController();
   static TextEditingController budgetController = TextEditingController();
+
+  void saveNewTrip(BuildContext context) async {
+    MyUserModel _userModel = Provider.of<MyUserModel>(context, listen: false);
+
+    MyTripModel _tripModel = Provider.of<MyTripModel>(context, listen: false);
+
+    if (_selectedCity != null && _selectedCity!.isNotEmpty) {
+      bool _creatingTrip = await _tripModel.createTrip(
+          _userModel.user,
+          _selectedCity,
+          dateController.text,
+          int.parse(budgetController.text),
+          int.parse(dayController.text));
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => LocalPeoplePage(
+            selectedCity: _selectedCity!,
+            departureDate: dateController.text,
+            stayDuration: dayController.text,
+            budget: budgetController.text,
+          ),
+        ),
+      );
+    } else {
+      // Kullanıcıya uyarı göster
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Lütfen bir şehir seçin.'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,27 +106,7 @@ class NewTripPage extends StatelessWidget {
             CustomButton(
               text: "Oluştur",
               onPressed: () {
-                if (_selectedCity != null && _selectedCity!.isNotEmpty) {
-                  // Navigator ile LocalPeoplePage'e geçiş ve veri aktarımı yapılacak
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LocalPeoplePage(
-                        selectedCity: _selectedCity!,
-                        departureDate: dateController.text,
-                        stayDuration: dayController.text,
-                        budget: budgetController.text,
-                      ),
-                    ),
-                  );
-                } else {
-                  // Kullanıcıya uyarı göster
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Lütfen bir şehir seçin.'),
-                    ),
-                  );
-                }
+                saveNewTrip(context);
               },
               color: Colors.red,
               textColor: Colors.white,

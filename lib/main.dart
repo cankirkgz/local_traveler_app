@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:local_traveler_app/landingPage.dart';
 import 'package:local_traveler_app/locator.dart';
+import 'package:local_traveler_app/viewmodel/my_trip_model.dart'; // MyTripModel eklenmiştir
 import 'package:local_traveler_app/viewmodel/my_user_model.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +25,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MyUserModel>(
-      create: (context) => MyUserModel(), // create parametresi kullanıldı
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<MyUserModel>(
+          create: (context) => MyUserModel(),
+        ),
+        ChangeNotifierProvider<MyTripModel>(
+          // MyTripModel provider'ı eklendi
+          create: (context) => MyTripModel(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:local_traveler_app/model/UserModel.dart';
 import 'package:local_traveler_app/screens/HomePage.dart';
-import 'package:local_traveler_app/services/auth_service.dart';
 import 'package:local_traveler_app/viewmodel/my_user_model.dart';
 import 'package:local_traveler_app/widgets/CustomButton.dart';
 import 'package:local_traveler_app/widgets/CustomInput.dart';
