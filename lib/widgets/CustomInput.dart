@@ -16,6 +16,7 @@ class CustomInput extends StatefulWidget {
   final TextEditingController? controller;
   final InputType inputType;
   final ValueChanged<String>? onChanged;
+  final String? defaultValue; // Yeni parametre
 
   CustomInput({
     required this.hintText,
@@ -26,6 +27,7 @@ class CustomInput extends StatefulWidget {
     this.controller,
     required this.inputType,
     this.onChanged,
+    this.defaultValue, // Parametreyi ekleyin
   });
 
   @override
@@ -41,7 +43,12 @@ class _CustomInputState extends State<CustomInput> {
   void initState() {
     super.initState();
     _textController = widget.controller ?? TextEditingController();
-    _selectedCity = null;
+    _selectedCity = widget.defaultValue; // Başlangıç değerini atayın
+    // TextField için varsayılan değeri ata
+    if (widget.inputType == InputType.TextField &&
+        widget.defaultValue != null) {
+      _textController.text = widget.defaultValue!;
+    }
   }
 
   @override

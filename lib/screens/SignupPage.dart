@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:local_traveler_app/model/UserModel.dart';
+import 'package:local_traveler_app/screens/HomePage.dart';
 import 'package:local_traveler_app/services/auth_service.dart';
 import 'package:local_traveler_app/viewmodel/my_user_model.dart';
 import 'package:local_traveler_app/widgets/CustomButton.dart';
@@ -28,15 +30,15 @@ class _SignupPageState extends State<SignupPage> {
     _errorMessage = null;
   }
 
-  void onConnect() {
+  void onConnect() async {
+    final _userModel = Provider.of<MyUserModel>(context, listen: false);
+
     String email = emailController.text;
     String password = passwordController.text;
     String name = nameController.text;
+    String city = _selectedCity!; // Şehir bilgisini _selectedCity'den alın
 
-    if (email.isEmpty ||
-        password.isEmpty ||
-        name.isEmpty ||
-        _selectedCity == null) {
+    if (email.isEmpty || password.isEmpty || name.isEmpty || city == null) {
       setState(() {
         _errorMessage = 'Tüm alanları doldurunuz';
       });
@@ -48,12 +50,50 @@ class _SignupPageState extends State<SignupPage> {
       setState(() {
         _errorMessage = null;
       });
-      AuthService().registerUser(
-        name: nameController.text,
-        email: emailController.text,
-        password: passwordController.text,
-        city: _selectedCity!,
-      );
+
+      print("email: ${emailController.text}\n");
+      print("Şifre: ${passwordController.text}\n");
+      print("İsim: ${nameController.text}\n");
+      print("Şehir: $_selectedCity\n");
+
+      // Kullanıcı nesnesi oluştur
+      UserModel? _creatingUser =
+          await _userModel.createUserWithEmailAndPassword(email, password);
+
+      if (_creatingUser != null) {
+        print("Kayıt olan kullanıcı: " +
+            _creatingUser.id.toString() +
+            "isim: ${_creatingUser.name}");
+
+        // Veritabanına kullanıcı bilgilerini ekle
+        bool success =
+            await _userModel.saveUserDetails(_creatingUser.id, name, city);
+        if (success) {
+          print("Kullanıcı bilgileri başarıyla kaydedildi.");
+          // HomePage'e yönlendirme
+          if (mounted) {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => HomePage(
+                  userModel: _creatingUser,
+                ),
+              ),
+            );
+          }
+        } else {
+          if (mounted) {
+            setState(() {
+              _errorMessage = 'Kullanıcı bilgileri kaydedilemedi!';
+            });
+          }
+        }
+      } else {
+        if (mounted) {
+          setState(() {
+            _errorMessage = 'Kullanıcı oluşturulamadı!';
+          });
+        }
+      }
     }
   }
 
@@ -117,18 +157,21 @@ class _SignupPageState extends State<SignupPage> {
                     isPassword: false,
                     inputType: InputType.TextField,
                     controller: emailController,
+                    defaultValue: "mcankirkgoz@gmail.com",
                   ),
                   CustomInput(
                     hintText: "Parola",
                     isPassword: true,
                     inputType: InputType.TextField,
                     controller: passwordController,
+                    defaultValue: "123456",
                   ),
                   CustomInput(
                     hintText: "İsim Soyisim",
                     isPassword: false,
                     inputType: InputType.TextField,
                     controller: nameController,
+                    defaultValue: "Can Kırkgöz",
                   ),
                   CustomInput(
                     hintText: "Şehir seç",
@@ -139,6 +182,7 @@ class _SignupPageState extends State<SignupPage> {
                         _selectedCity = selectedCity;
                       });
                     },
+                    defaultValue: "Ankara",
                   ),
                   SizedBox(height: 20),
                   RichText(

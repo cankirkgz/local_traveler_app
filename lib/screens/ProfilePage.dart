@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:local_traveler_app/viewmodel/my_user_model.dart';
 import 'package:local_traveler_app/widgets/VisitedPlaceList.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key});
+
+  void _signOut(BuildContext context) async {
+    final _userModel = Provider.of<MyUserModel>(context, listen: false);
+    await _userModel.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +23,17 @@ class ProfilePage extends StatelessWidget {
             color: Colors.white, // Başlık rengini beyaz yap
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.exit_to_app,
+              color: Colors.white, // Çıkış yap ikonu rengini beyaz yap
+            ),
+            onPressed: () {
+              _signOut(context);
+            },
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

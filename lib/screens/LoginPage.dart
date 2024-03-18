@@ -1,8 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:local_traveler_app/model/UserModel.dart';
+import 'package:local_traveler_app/screens/HomePage.dart';
 import 'package:local_traveler_app/screens/SignupPage.dart';
+import 'package:local_traveler_app/viewmodel/my_user_model.dart';
 import 'package:local_traveler_app/widgets/CustomButton.dart';
 import 'package:local_traveler_app/widgets/CustomInput.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -20,7 +24,8 @@ class _LoginPageState extends State<LoginPage> {
     _errorMessage = null;
   }
 
-  void onLogin() {
+  void onLogin() async {
+    final _userModel = Provider.of<MyUserModel>(context, listen: false);
     String email = _emailController.text;
     String password = _passwordController.text;
 
@@ -39,6 +44,26 @@ class _LoginPageState extends State<LoginPage> {
 
       print('Email: $email');
       print('Password: $password');
+      UserModel? _loginUser =
+          await _userModel.signInWithEmailAndPassword(email, password);
+
+      if (_loginUser != null) {
+        print("Oturum açan kullanıcı: " + _loginUser.id.toString());
+
+        // HomePage'e yönlendirme
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => HomePage(
+              userModel: _loginUser,
+            ),
+          ),
+        );
+      } else {
+        // Kullanıcı giriş yaparken bir hata oluştu
+        setState(() {
+          _errorMessage = 'Kullanıcı giriş yaparken bir hata oluştu!';
+        });
+      }
     }
   }
 
@@ -101,12 +126,14 @@ class _LoginPageState extends State<LoginPage> {
                     isPassword: false,
                     inputType: InputType.TextField,
                     controller: _emailController,
+                    defaultValue: "mcankirkgoz@gmail.com",
                   ),
                   CustomInput(
                     hintText: "Parola",
                     isPassword: true,
                     inputType: InputType.TextField,
                     controller: _passwordController,
+                    defaultValue: "123456",
                   ),
                   SizedBox(height: 20),
                   _errorMessage != null

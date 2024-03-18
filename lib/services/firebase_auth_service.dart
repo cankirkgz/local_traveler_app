@@ -26,13 +26,33 @@ class FirebaseAuthService implements AuthBase {
     if (user == null) {
       throw Exception('Kullanıcı bulunamadı.'); // Kullanıcı yoksa hata fırlatın
     }
-    return UserModel(id: user.uid);
+    return UserModel(
+      id: user.uid,
+      email: user.email!,
+      name: "deneme",
+      city: 'deneme',
+    );
   }
 
   @override
-  Future<UserModel> signInWithEmailAndPassword() {
-    // TODO: implement signInWithEmailAndPassword
-    throw UnimplementedError();
+  Future<UserModel?> signInWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      final UserCredential userCredential = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+      final User? user =
+          userCredential.user; // UserCredential'dan User'e dönüştür
+      if (user == null) {
+        throw Exception('Kullanıcı bulunamadı.'); // Throw exception if no user
+      } else {
+        final userModel = _userFromFirebase(user);
+        return userModel;
+      }
+    } catch (e) {
+      print(
+          "Firebase auth service içindeki current user hata: ${e.toString()}");
+      return null; // Hata durumunda null döndür
+    }
   }
 
   @override
@@ -43,6 +63,25 @@ class FirebaseAuthService implements AuthBase {
     } catch (e) {
       print("Firebase auth service içindeki signout hata: ${e.toString()}");
       return false;
+    }
+  }
+
+  @override
+  Future<UserModel?> createUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      final UserCredential userCredential = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      final User? user = userCredential.user;
+      if (user == null) {
+        throw Exception('Kullanıcı oluşturulamadı.');
+      } else {
+        final userModel = _userFromFirebase(user);
+        return userModel;
+      }
+    } catch (e) {
+      print("Firebase auth service içindeki create user hata: ${e.toString()}");
+      return null;
     }
   }
 }
