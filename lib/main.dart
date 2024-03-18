@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:local_traveler_app/screens/HomePage.dart';
+import 'package:local_traveler_app/screens/LoginPage.dart';
+import 'package:local_traveler_app/screens/Onboarding.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
@@ -18,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: Onbording(),
     );
   }
 }
