@@ -1,0 +1,20 @@
+com.example.local_traveler_app-debug-0 C:\Flutter Apps\local_traveler_app\android\app\src\debug\res
+com.example.local_traveler_app-main-1 C:\Flutter Apps\local_traveler_app\android\app\src\main\res
+com.example.local_traveler_app-RES-2 C:\Flutter Apps\local_traveler_app\build\app\RES\processDebugGoogleServices
+com.example.local_traveler_app-pngs-3 C:\Flutter Apps\local_traveler_app\build\app\generated\res\pngs\debug
+com.example.local_traveler_app-resValues-4 C:\Flutter Apps\local_traveler_app\build\app\generated\res\resValues\debug
+com.example.local_traveler_app-rs-5 C:\Flutter Apps\local_traveler_app\build\app\generated\res\rs\debug
+com.example.local_traveler_app-mergeDebugResources-6 C:\Flutter Apps\local_traveler_app\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.local_traveler_app-mergeDebugResources-7 C:\Flutter Apps\local_traveler_app\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.local_traveler_app-merged_res-8 C:\Flutter Apps\local_traveler_app\build\app\intermediates\merged_res\debug
+com.example.local_traveler_app-packaged_res-9 C:\Flutter Apps\local_traveler_app\build\cloud_firestore\intermediates\packaged_res\debug
+com.example.local_traveler_app-packaged_res-10 C:\Flutter Apps\local_traveler_app\build\firebase_auth\intermediates\packaged_res\debug
+com.example.local_traveler_app-packaged_res-11 C:\Flutter Apps\local_traveler_app\build\firebase_core\intermediates\packaged_res\debug
+com.example.local_traveler_app-jetified-play-services-base-18.0.1-12 C:\Users\mcank\.gradle\caches\transforms-3\0694fe8d24144c4eec45f47099d1eacf\transformed\jetified-play-services-base-18.0.1\res
+com.example.local_traveler_app-jetified-window-1.0.0-beta04-13 C:\Users\mcank\.gradle\caches\transforms-3\4ed09b80554666fe568bba0e0475894f\transformed\jetified-window-1.0.0-beta04\res
+com.example.local_traveler_app-jetified-annotation-experimental-1.1.0-14 C:\Users\mcank\.gradle\caches\transforms-3\609e42c8b73a2fcbbb0e63673ccea1a8\transformed\jetified-annotation-experimental-1.1.0\res
+com.example.local_traveler_app-core-1.6.0-15 C:\Users\mcank\.gradle\caches\transforms-3\7161e115e6642554c3e4a9f8b9422ac3\transformed\core-1.6.0\res
+com.example.local_traveler_app-jetified-window-java-1.0.0-beta04-16 C:\Users\mcank\.gradle\caches\transforms-3\d5baea7140e36056cbb265d288a90777\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.local_traveler_app-browser-1.4.0-17 C:\Users\mcank\.gradle\caches\transforms-3\eec0ba436f3a8a4959d6a4951dc0afad\transformed\browser-1.4.0\res
+com.example.local_traveler_app-jetified-play-services-basement-18.1.0-18 C:\Users\mcank\.gradle\caches\transforms-3\f955c6f4971103253418d2448abb373c\transformed\jetified-play-services-basement-18.1.0\res
+com.example.local_traveler_app-jetified-firebase-common-20.4.2-19 C:\Users\mcank\.gradle\caches\transforms-3\f993598c4d20f11c9c7593adca2932f1\transformed\jetified-firebase-common-20.4.2\res
